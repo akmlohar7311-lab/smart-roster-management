@@ -1,0 +1,296 @@
+
+:root {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #f1f3f9;
+  background: #090b10;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 3px;
+}
+
+::selection {
+  background: #7654ce;
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #101218;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #34384a;
+  border: 2px solid #101218;
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555b72;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ==========================================
+   DATASTRAW — READABILITY IMPROVEMENTS
+   Larger text across all pages
+   ========================================== */
+
+/* Overall typography */
+body {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Sidebar navigation */
+.nav-item {
+  font-size: 14px;
+}
+
+.brand h2 {
+  font-size: 20px;
+}
+
+.brand span,
+.sidebar-footer strong {
+  font-size: 12px;
+}
+
+.sidebar-footer small {
+  font-size: 11px;
+}
+
+/* Dashboard headings */
+.page-heading h1 {
+  font-size: clamp(28px, 3vw, 36px);
+}
+
+.page-subtitle {
+  font-size: 15px;
+}
+
+.eyebrow {
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 13px;
+}
+
+/* Statistic cards */
+.stat-top > span {
+  font-size: 14px;
+}
+
+.stat-card h2 {
+  font-size: 35px;
+}
+
+.stat-card h2.stat-status {
+  font-size: 24px;
+}
+
+.stat-card p {
+  font-size: 13px;
+}
+
+/* Panel titles */
+.panel-heading h2 {
+  font-size: 19px;
+}
+
+.panel-heading p {
+  font-size: 13px;
+}
+
+/* Employee directory */
+.employee-table th {
+  font-size: 12px;
+}
+
+.employee-table td {
+  font-size: 14px;
+}
+
+.employee-identity strong {
+  font-size: 14px;
+}
+
+.employee-code {
+  font-size: 12px;
+}
+
+.status {
+  font-size: 12px;
+}
+
+/* Quick access */
+.quick-link strong {
+  font-size: 14px;
+}
+
+.quick-note {
+  font-size: 13px;
+}
+
+/* Monthly roster */
+.roster-page,
+.roster-page input,
+.roster-page select {
+  font-size: 14px;
+}
+
+.roster-toolbar h2 {
+  font-size: 23px;
+}
+
+.roster-section-title h3 {
+  font-size: 19px;
+}
+
+.roster-table td {
+  font-size: 14px;
+}
+
+.roster-table td strong {
+  font-size: 14px;
+}
+
+.roster-table th {
+  font-size: 12px;
+}
+
+.roster-group {
+  font-size: 14px;
+}
+
+/* Leave Management and Conflicts */
+.management-page input,
+.management-page select,
+.management-page textarea {
+  font-size: 14px;
+}
+
+.management-table td {
+  font-size: 14px;
+}
+
+.management-table th {
+  font-size: 12px;
+}
+
+.management-header p,
+.management-count,
+.management-muted {
+  font-size: 14px;
+}
+
+.management-page button {
+  font-size: 13px;
+}
+
+/* Roster Editor */
+.editor-page input,
+.editor-page select {
+  font-size: 14px;
+}
+
+.editor-table td {
+  font-size: 14px;
+}
+
+.editor-table th {
+  font-size: 12px;
+}
+
+.editor-panel h2 {
+  font-size: 23px;
+}
+
+.editor-panel h3 {
+  font-size: 19px;
+}
+
+.editor-muted,
+.editor-header p {
+  font-size: 14px;
+}
+
+.editor-page button {
+  font-size: 13px;
+}
+
+/* Better spacing */
+.employee-table td,
+.roster-table td,
+.management-table td,
+.editor-table td {
+  padding-top: 17px;
+  padding-bottom: 17px;
+}
+
+.nav-item {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .page-heading h1 {
+    font-size: 28px;
+  }
+
+  .stat-card h2 {
+    font-size: 30px;
+  }
+}

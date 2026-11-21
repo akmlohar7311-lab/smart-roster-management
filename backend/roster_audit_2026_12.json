@@ -1,0 +1,54 @@
+{
+  "roster": {
+    "id": "9ab7d77f-dae4-4f11-a72a-cee52de877a5",
+    "month": "2026-12",
+    "version": 1,
+    "status": "draft",
+    "total_entries": 1261,
+    "working_shifts": 1255,
+    "cancelled_shifts": 6
+  },
+  "validation": {
+    "roster_id": "9ab7d77f-dae4-4f11-a72a-cee52de877a5",
+    "roster_month": "2026-12-01",
+    "version": 1,
+    "total_shifts": 1261,
+    "total_violations": 4,
+    "violation_summary": {
+      "insufficient_coverage": 4
+    },
+    "violations": [
+      {
+        "type": "insufficient_coverage",
+        "date": "2026-12-16",
+        "brand": "FitFuel",
+        "process": "Abandoned Cart Conversions",
+        "message": "Required 1, scheduled 0"
+      },
+      {
+        "type": "insufficient_coverage",
+        "date": "2026-12-16",
+        "brand": "GlowNest",
+        "process": "Abandoned Cart Conversions",
+        "message": "Required 1, scheduled 0"
+      },
+      {
+        "type": "insufficient_coverage",
+        "date": "2026-12-16",
+        "brand": "FitFuel",
+        "process": "Customer Support",
+        "message": "Required 1, scheduled 0"
+      },
+      {
+        "type": "insufficient_coverage",
+        "date": "2026-12-16",
+        "brand": "GlowNest",
+        "process": "Customer Support",
+        "message": "Required 1, scheduled 0"
+      }
+    ]
+  },
+  "violations_by_date": {
+    "2026-12-16": 4
+  }
+}

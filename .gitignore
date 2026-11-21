@@ -1,0 +1,30 @@
+﻿# Secret environment files
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node.js
+node_modules/
+dist/
+.vite/
+
+# PyCharm and VS Code
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
