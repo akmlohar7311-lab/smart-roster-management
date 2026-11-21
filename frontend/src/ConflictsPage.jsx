@@ -1,3 +1,4 @@
+﻿import { apiFetch } from './lib/api'
 
 import { useEffect, useState } from 'react'
 import './ManagementPages.css'
@@ -19,7 +20,7 @@ export default function ConflictsPage() {
       const [year, monthNumber] = month.split('-')
 
       // First find the saved roster for this month.
-      const rosterResponse = await fetch(
+      const rosterResponse = await apiFetch(
         `/api/roster-view/monthly?year=${year}&month=${Number(monthNumber)}`
       )
 
@@ -34,7 +35,7 @@ export default function ConflictsPage() {
       const roster = await rosterResponse.json()
 
       // Then independently validate that roster.
-      const response = await fetch(
+      const response = await apiFetch(
         `/api/rosters/${roster.roster_id}/validate`
       )
 
@@ -238,3 +239,4 @@ export default function ConflictsPage() {
     </div>
   )
 }
+

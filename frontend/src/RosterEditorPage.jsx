@@ -1,3 +1,4 @@
+﻿import { apiFetch } from './lib/api'
 
 import CreateShiftForm from './CreateShiftForm'
 import { useEffect, useMemo, useState } from 'react'
@@ -6,7 +7,7 @@ import './RosterEditorPage.css'
 const PAGE_SIZE = 20
 
 async function apiRequest(url, options = {}) {
-  const response = await fetch(url, options)
+  const response = await apiFetch(url, options)
   const data = await response.json().catch(() => ({}))
 
   if (!response.ok) {
@@ -119,7 +120,7 @@ export default function RosterEditorPage() {
     entries.forEach(entry => {
       unique.set(
         entry.employee_code,
-        `${entry.employee_code} — ${entry.employee_name}`
+        `${entry.employee_code} â€” ${entry.employee_name}`
       )
     })
 
@@ -468,7 +469,7 @@ export default function RosterEditorPage() {
 
                       <td>
                         {timeLabel(entry.start_time)}
-                        {'–'}
+                        {'â€“'}
                         {timeLabel(entry.end_time)}
                       </td>
 
@@ -548,7 +549,7 @@ export default function RosterEditorPage() {
                   <span>Time</span>
                   <strong>
                     {timeLabel(selected.start_time)}
-                    {' – '}
+                    {' â€“ '}
                     {timeLabel(selected.end_time)}
                   </strong>
                 </div>
@@ -587,7 +588,7 @@ export default function RosterEditorPage() {
                   <p className="editor-muted">
                     Already assigned:
                     {' '}{backups.assigned_backups.length}
-                    {' '}· Potential temporary assignments:
+                    {' '}Â· Potential temporary assignments:
                     {' '}{backups.potential_backups.length}
                   </p>
 
@@ -600,9 +601,9 @@ export default function RosterEditorPage() {
                       )}
                     >
                       <strong>
-                        {employee.employee_code} — {employee.name}
+                        {employee.employee_code} â€” {employee.name}
                       </strong>
-                      <span>Already assigned · Select</span>
+                      <span>Already assigned Â· Select</span>
                     </button>
                   ))}
 
@@ -612,7 +613,7 @@ export default function RosterEditorPage() {
                       key={employee.employee_code}
                     >
                       <strong>
-                        {employee.employee_code} — {employee.name}
+                        {employee.employee_code} â€” {employee.name}
                       </strong>
 
                       <span>
@@ -731,3 +732,4 @@ export default function RosterEditorPage() {
     </div>
   )
 }
+

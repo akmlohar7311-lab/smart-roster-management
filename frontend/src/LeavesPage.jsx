@@ -1,3 +1,4 @@
+﻿import { apiFetch } from './lib/api'
 
 import { useEffect, useState } from 'react'
 import './ManagementPages.css'
@@ -26,8 +27,8 @@ export default function LeavesPage({ onRosterChanged }) {
 
     try {
       const [leaveResponse, employeeResponse] = await Promise.all([
-        fetch('/api/leaves'),
-        fetch('/api/employees')
+        apiFetch('/api/leaves'),
+        apiFetch('/api/employees')
       ])
 
       if (!leaveResponse.ok || !employeeResponse.ok) {
@@ -70,7 +71,7 @@ export default function LeavesPage({ onRosterChanged }) {
     setBusyId('request')
 
     try {
-      const response = await fetch('/api/leaves/request', {
+      const response = await apiFetch('/api/leaves/request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -108,7 +109,7 @@ export default function LeavesPage({ onRosterChanged }) {
     setBusyId(leaveId)
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `/api/leaves/${leaveId}/approve`,
         { method: 'PATCH' }
       )
@@ -198,7 +199,7 @@ export default function LeavesPage({ onRosterChanged }) {
                   key={employee.employee_code}
                   value={employee.employee_code}
                 >
-                  {employee.employee_code} — {employee.name}
+                  {employee.employee_code} â€” {employee.name}
                 </option>
               ))}
             </select>
@@ -373,7 +374,7 @@ export default function LeavesPage({ onRosterChanged }) {
                 key={roster.roster_id}
               >
                 <h3>
-                  {roster.roster_month} — Version {roster.version}
+                  {roster.roster_month} â€” Version {roster.version}
                 </h3>
 
                 <p>
@@ -411,3 +412,4 @@ export default function LeavesPage({ onRosterChanged }) {
     </div>
   )
 }
+

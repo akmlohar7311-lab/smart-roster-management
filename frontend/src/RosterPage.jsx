@@ -1,3 +1,4 @@
+﻿import { apiFetch } from './lib/api'
 
 import { useEffect, useMemo, useState } from 'react'
 import './RosterPage.css'
@@ -47,7 +48,7 @@ function RosterPage() {
     try {
       const [year, monthNumber] = month.split('-')
 
-      const response = await fetch(
+      const response = await apiFetch(
         `/api/roster-view/monthly?year=${year}&month=${Number(monthNumber)}`
       )
 
@@ -374,7 +375,7 @@ function RosterPage() {
                       <td>{item.pod}</td>
                       <td>
                         {formatTime(item.start_time)}
-                        {' – '}
+                        {' â€“ '}
                         {formatTime(item.end_time)}
                       </td>
                       <td>
@@ -425,3 +426,4 @@ function RosterPage() {
 }
 
 export default RosterPage
+

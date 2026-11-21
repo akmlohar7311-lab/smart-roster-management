@@ -1,21 +1,22 @@
+﻿import { apiFetch } from './lib/api'
 
 import { useState } from 'react'
 
 const PROCESSES = [
   {
-    label: 'FitFuel — Abandoned Cart Conversions',
+    label: 'FitFuel â€” Abandoned Cart Conversions',
     id: '3e0c11f3-f5cb-4a93-8503-4a47b6be8126'
   },
   {
-    label: 'FitFuel — Customer Support',
+    label: 'FitFuel â€” Customer Support',
     id: '5953a851-86cd-4a83-8455-96bdc3f20db7'
   },
   {
-    label: 'GlowNest — Abandoned Cart Conversions',
+    label: 'GlowNest â€” Abandoned Cart Conversions',
     id: '4e427d96-1a80-4008-b9bf-739dc32d7692'
   },
   {
-    label: 'GlowNest — Customer Support',
+    label: 'GlowNest â€” Customer Support',
     id: 'c5dd0181-f56b-46ff-a76a-e712123980a4'
   }
 ]
@@ -59,7 +60,7 @@ export default function CreateShiftForm({
     setBusy(true)
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `/api/roster-editor/rosters/${rosterId}/shifts`,
         {
           method: 'POST',
@@ -208,3 +209,4 @@ export default function CreateShiftForm({
     </section>
   )
 }
+

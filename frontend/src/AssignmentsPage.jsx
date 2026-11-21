@@ -1,3 +1,4 @@
+﻿import { apiFetch } from './lib/api'
 
 import { useEffect, useMemo, useState } from 'react'
 import './AssignmentsPage.css'
@@ -24,7 +25,7 @@ function emptyForm() {
 }
 
 async function requestJson(url, options = {}) {
-  const response = await fetch(url, {
+  const response = await apiFetch(url, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -182,7 +183,7 @@ function AssignmentsPage() {
 
   async function endAssignment(item) {
     const proposedDate = window.prompt(
-      `End the assignment for ${item.employee_name} — ${item.brand} / ${item.process}.\n\nEnter the last valid date (YYYY-MM-DD):`,
+      `End the assignment for ${item.employee_name} â€” ${item.brand} / ${item.process}.\n\nEnter the last valid date (YYYY-MM-DD):`,
       today()
     )
 
@@ -262,19 +263,19 @@ function AssignmentsPage() {
           onClick={loadData}
           disabled={loading || busy}
         >
-          ↻ Refresh Assignments
+          â†» Refresh Assignments
         </button>
       </div>
 
       {error && (
         <div className="assignment-error" role="alert">
-          ⚠ {error}
+          âš  {error}
         </div>
       )}
 
       {notice && (
         <div className="assignment-notice" role="status">
-          ✓ {notice}
+          âœ“ {notice}
         </div>
       )}
 
@@ -316,7 +317,7 @@ function AssignmentsPage() {
 
                 {employeeChoices.map(item => (
                   <option key={item.id} value={item.id}>
-                    {item.employee_code} — {item.name}
+                    {item.employee_code} â€” {item.name}
                   </option>
                 ))}
 
@@ -350,14 +351,14 @@ function AssignmentsPage() {
 
                 {processChoices.map(item => (
                   <option key={item.id} value={item.id}>
-                    {item.brand} — {item.process}
+                    {item.brand} â€” {item.process}
                   </option>
                 ))}
 
                 {selectedProcess &&
                   !selectedProcess.active && (
                     <option value={selectedProcess.id}>
-                      {selectedProcess.brand} —
+                      {selectedProcess.brand} â€”
                       {selectedProcess.process} (Inactive)
                     </option>
                   )}
@@ -429,7 +430,7 @@ function AssignmentsPage() {
           {selectedEmployee && (
             <p className="assignment-context">
               Pod: <strong>{selectedEmployee.pod}</strong>
-              {' · '}
+              {' Â· '}
               Pod lead:
               <strong> {selectedEmployee.pod_lead}</strong>
             </p>
@@ -570,3 +571,4 @@ function AssignmentsPage() {
 }
 
 export default AssignmentsPage
+

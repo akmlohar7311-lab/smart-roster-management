@@ -1,27 +1,30 @@
+﻿
+import { apiFetch } from './lib/api'
 
 import { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+
 import './AICopilotPage.css'
 
 const suggestions = [
   {
-    icon: '📅',
+    icon: '\u{1F4C5}',
     title: 'Roster Planning',
     question: 'How can I create a fair monthly employee roster?'
   },
   {
-    icon: '⚠️',
+    icon: '\u26A0\uFE0F',
     title: 'Staffing Shortages',
     question: 'How should I handle understaffed shifts?'
   },
   {
-    icon: '🌴',
+    icon: '\u{1F334}',
     title: 'Leave Management',
     question: 'How can I prevent staffing conflicts when employees take leave?'
   },
   {
-    icon: '👥',
+    icon: '\u{1F465}',
     title: 'Backup Planning',
     question: 'How should I choose backup employees?'
   }
@@ -53,7 +56,7 @@ function AICopilotPage() {
   const busyRef = useRef(false)
   const requestIdRef = useRef(0)
 
-  // Scroll to newest message when the conversation changes.
+  // Scroll to newest message when conversation changes.
   useEffect(() => {
     bottomRef.current?.scrollIntoView({
       behavior: 'smooth',
@@ -61,7 +64,7 @@ function AICopilotPage() {
     })
   }, [messages, loading])
 
-  // Cancel an unfinished request if the page is closed.
+  // Cancel unfinished requests if the page is closed.
   useEffect(() => {
     return () => controllerRef.current?.abort()
   }, [])
@@ -74,6 +77,7 @@ function AICopilotPage() {
     }
 
     busyRef.current = true
+
     const requestId = ++requestIdRef.current
 
     setLoading(true)
@@ -96,11 +100,13 @@ function AICopilotPage() {
     controllerRef.current = controller
 
     try {
-      const response = await fetch('/api/ai/ask', {
+      const response = await apiFetch('/api/ai/ask', {
         method: 'POST',
+
         headers: {
           'Content-Type': 'application/json'
         },
+
         body: JSON.stringify({ question }),
         signal: controller.signal
       })
@@ -136,6 +142,7 @@ function AICopilotPage() {
         ...previous,
         aiMessage
       ])
+
     } catch (err) {
       if (
         err.name !== 'AbortError' &&
@@ -146,6 +153,7 @@ function AICopilotPage() {
           'Unable to connect to Gemini.'
         )
       }
+
     } finally {
       if (requestId === requestIdRef.current) {
         busyRef.current = false
@@ -173,8 +181,10 @@ function AICopilotPage() {
 
   function startNewChat() {
     ++requestIdRef.current
+
     controllerRef.current?.abort()
     controllerRef.current = null
+
     busyRef.current = false
 
     setMessages([createWelcomeMessage()])
@@ -197,17 +207,25 @@ function AICopilotPage() {
   return (
     <section className="ai-copilot-page">
 
+      {/* Header */}
+
       <header className="ai-copilot-header">
+
         <div className="ai-header-identity">
-          <div className="ai-logo">✦</div>
+
+          <div className="ai-logo">
+            {'\u2726'}
+          </div>
 
           <div>
             <h2>Datastraw AI Copilot</h2>
             <p>Intelligent Workforce Assistant</p>
           </div>
+
         </div>
 
         <div className="ai-header-actions">
+
           <span className="ai-model-label">
             <span className="ai-online-dot" />
             Powered by Gemini
@@ -218,17 +236,23 @@ function AICopilotPage() {
             className="ai-new-chat"
             onClick={startNewChat}
           >
-            ↻ New Chat
+            {'\u21BB'} New Chat
           </button>
+
         </div>
+
       </header>
+
+      {/* Chat Content */}
 
       <div className="ai-chat-content" ref={chatRef}>
 
         {showSuggestions && (
+
           <div className="ai-welcome">
+
             <div className="ai-welcome-icon">
-              ✦
+              {'\u2726'}
             </div>
 
             <h2>
@@ -241,49 +265,65 @@ function AICopilotPage() {
               and leave management.
             </p>
 
+            {/* Suggestion Cards */}
+
             <div className="ai-suggestions">
+
               {suggestions.map(item => (
+
                 <button
                   type="button"
                   key={item.title}
                   className="ai-suggestion-card"
                   disabled={loading}
-                  onClick={() =>
-                    sendMessage(item.question)
-                  }
+                  onClick={() => sendMessage(item.question)}
                 >
+
                   <span className="ai-suggestion-icon">
                     {item.icon}
                   </span>
 
-                  <strong>{item.title}</strong>
+                  <strong>
+                    {item.title}
+                  </strong>
 
                   <span className="ai-suggestion-arrow">
-                    ↗
+                    {'\u2192'}
                   </span>
+
                 </button>
+
               ))}
+
             </div>
+
           </div>
+
         )}
+
+        {/* Messages */}
 
         <div className="ai-messages">
 
           {messages.map(message => (
+
             <article
               key={message.id}
-              className={
-                `ai-message ai-message-${message.role}`
-              }
+              className={`ai-message ai-message-${message.role}`}
             >
+
               <div className="ai-message-avatar">
+
                 {message.role === 'assistant'
-                  ? '✦'
-                  : '👤'}
+                  ? '\u2726'
+                  : '\u{1F464}'}
+
               </div>
 
               <div className="ai-message-body">
+
                 <div className="ai-message-topline">
+
                   <strong>
                     {message.role === 'assistant'
                       ? 'Datastraw Copilot'
@@ -293,35 +333,52 @@ function AICopilotPage() {
                   <span>
                     {formatTime(message.timestamp)}
                   </span>
+
                 </div>
 
                 <div className="ai-message-bubble">
+
                   {message.role === 'assistant' ? (
+
                     <div className="ai-markdown">
+
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         skipHtml
                       >
                         {message.content}
                       </ReactMarkdown>
+
                     </div>
+
                   ) : (
+
                     <div className="ai-user-text">
                       {message.content}
                     </div>
+
                   )}
+
                 </div>
+
               </div>
+
             </article>
+
           ))}
 
+          {/* Loading Animation */}
+
           {loading && (
+
             <div className="ai-message ai-message-assistant">
+
               <div className="ai-message-avatar">
-                ✦
+                {'\u2726'}
               </div>
 
               <div className="ai-message-body">
+
                 <div className="ai-message-topline">
                   <strong>Datastraw Copilot</strong>
                 </div>
@@ -335,32 +392,50 @@ function AICopilotPage() {
                   <span />
                   <span />
                 </div>
+
               </div>
+
             </div>
+
           )}
 
           <div ref={bottomRef} />
+
         </div>
+
       </div>
 
+      {/* Chat Footer */}
+
       <div className="ai-chat-footer">
+
         {error && (
+
           <div className="ai-error" role="alert">
-            <span>⚠ {error}</span>
+
+            <span>
+              {'\u26A0\uFE0F'} {error}
+            </span>
+
             <button
               type="button"
               onClick={() => setError('')}
               aria-label="Dismiss error"
             >
-              ×
+              {'\u00D7'}
             </button>
+
           </div>
+
         )}
+
+        {/* Message Input */}
 
         <form
           className="ai-input-area"
           onSubmit={handleSubmit}
         >
+
           <textarea
             ref={textareaRef}
             value={input}
@@ -369,9 +444,7 @@ function AICopilotPage() {
             disabled={loading}
             aria-label="Message to AI Copilot"
             placeholder="Ask Datastraw AI Copilot anything..."
-            onChange={event =>
-              setInput(event.target.value)
-            }
+            onChange={event => setInput(event.target.value)}
             onKeyDown={handleKeyDown}
           />
 
@@ -383,16 +456,21 @@ function AICopilotPage() {
               input.trim().length < 3
             }
           >
-            {loading ? '···' : '➤'}
+            {loading ? '...' : '\u27A4'}
           </button>
+
         </form>
 
+        {/* Disclaimer */}
+
         <p className="ai-disclaimer">
-          Enter to send · Shift+Enter for new line ·
-          Powered by Google Gemini ·
+          Enter to send {'\u00B7'} Shift+Enter for new line {'\u00B7'}
+          Powered by Google Gemini {'\u00B7'}
           Read-only roster insights powered by Supabase and Google Gemini.
         </p>
+
       </div>
+
     </section>
   )
 }
